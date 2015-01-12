@@ -11,6 +11,23 @@
       padding: 0px
     }
   </style>
+  <style>
+    .hours {
+
+    }
+    .minutes {
+
+    }
+    #clock {
+      position: fixed;
+      bottom: 7%;
+      right: 3%;
+      font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+      font-size: x-large;
+      font-weight: bold;
+      color: cornflowerblue;
+    }
+  </style>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
   <script>
     function initialize() {
@@ -72,5 +89,14 @@
 </head>
 <body>
 <div id="map-canvas"></div>
+<div id="clock">
+  <span class="hours"></span>:
+  <span class="minutes"></span>
+  <script>
+    var d = new Date();
+    document.getElementsByClassName('hours')[0].innerHTML = ('0' + d.getHours()).slice(-2);
+    document.getElementsByClassName('minutes')[0].innerHTML = ('0' + d.getMinutes()).slice(-2);
+  </script>
+</div>
 </body>
 </html>
