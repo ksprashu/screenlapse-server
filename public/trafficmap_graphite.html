@@ -85,8 +85,6 @@
 <body>
 <div id="map-canvas"></div>
 <div id="clock">
-  <span class="hours"></span>:
-  <span class="minutes"></span>
   <script>
     var time = moment.utc().add({hours:5,minutes:30}).format('HH:mm');
     document.getElementById('clock').innerHTML = time.toString();
