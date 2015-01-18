@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Traffic layer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <style>
+    html, body, #map-canvas {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <style>
+    #clock {
+      position: fixed;
+      bottom: 7%;
+      right: 3%;
+      font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+      font-size: x-large;
+      font-weight: bold;
+      color: cornflowerblue;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+  <script>
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(12.9895122, 77.7375594);
+      var mapOptions = {
+        zoom: 15,
+        center: myLatlng
+      };
+
+      var styles = [
+        {
+          featureType: "all",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+//        }, {
+//          featureType: "landscape",
+//          elementType: "all",
+//          stylers: [
+//            { visibility: "off" }
+//          ]
+//        }, {
+//          featureType: "water",
+//          elementType: "all",
+//          stylers: [
+//            {visibility: "off"}
+//          ]
+//        }, {
+//          featureType: "road.local",
+//          elementType: "all",
+//          stylers: [
+//            {visibility: "off"}
+//          ]
+//        }, {
+//          featureType: "administrative",
+//          elementType: "all",
+//          stylers: [
+//            {visibility: "off"}
+//          ]
+        }];
+
+      var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      map.mapTypes.set('map_style', styledMap);
+      map.setMapTypeId('map_style');
+
+//      map.setOptions({styles: styles});
+
+      var trafficLayer = new google.maps.TrafficLayer();
+      trafficLayer.setMap(map);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
+</head>
+<body>
+<div id="map-canvas"></div>
+<div id="clock">
+  <script>
+    var time = moment.utc().add({hours:5,minutes:30}).format('HH:mm');
+    document.getElementById('clock').innerHTML = time.toString();
+//    document.getElementsByClassName('hours')[0].innerHTML = ('0' + d.getHours()).slice(-2);
+//    document.getElementsByClassName('minutes')[0].innerHTML = ('0' + d.getMinutes()).slice(-2);
+  </script>
+</div>
+</body>
+</html>
